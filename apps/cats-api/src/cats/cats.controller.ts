@@ -1,14 +1,16 @@
 import {
   Body,
   Controller,
+  DefaultValuePipe,
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
-import { Cat } from '@telia-cats-monorepo/shared-types';
 import { CatsService } from './cats.service';
 import { CreateCatDto } from './create-cat.dto';
 
@@ -22,8 +24,14 @@ export class CatsController {
   }
 
   @Get()
-  async findAll() {
-    return this.catsService.findAll();
+  async findAll(
+    @Query('take', new DefaultValuePipe(10), ParseIntPipe) take: number,
+    @Query('skip', new DefaultValuePipe(0), ParseIntPipe) skip: number,
+    @Query('name', new DefaultValuePipe(undefined)) name: string | undefined,
+    @Query('temperament', new DefaultValuePipe(undefined))
+    temperament: string | undefined
+  ) {
+    return this.catsService.findAll(take, skip, name, temperament);
   }
 
   @Get(':id')

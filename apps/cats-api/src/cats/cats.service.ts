@@ -1,13 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { Cat } from '@telia-cats-monorepo/shared-types';
-import catsData from './cats-data.json';
 import { PrismaService } from '../prisma.service';
 
 @Injectable()
 export class CatsService {
   constructor(private prisma: PrismaService) {}
 
-  private cats: Cat[] = catsData;
+  private cats: Cat[];
 
   create(cat: Cat) {
     this.cats.push(cat);
@@ -39,7 +38,18 @@ export class CatsService {
     this.cats = this.cats.filter((cat) => cat.id !== id);
   }
 
-  findAll() {
-    return this.prisma.cat.findMany();
+  findAll(take: number, skip: number, name?: string, temperament?: string) {
+    return this.prisma.cat.findMany({
+      skip,
+      take,
+      where: {
+        name: {
+          contains: name,
+        },
+        temperament: {
+          contains: temperament,
+        },
+      },
+    });
   }
 }
