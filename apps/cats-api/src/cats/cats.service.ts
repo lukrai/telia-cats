@@ -1,41 +1,27 @@
 import { Injectable } from '@nestjs/common';
-import { Cat } from '@telia-cats-monorepo/shared-types';
 import { PrismaService } from '../prisma.service';
+import { CreateCatDto } from './create-cat.dto';
 
 @Injectable()
 export class CatsService {
   constructor(private prisma: PrismaService) {}
 
-  private cats: Cat[];
-
-  create(cat: Cat) {
-    this.cats.push(cat);
+  async create(cat: CreateCatDto) {
+    return this.prisma.cat.create({ data: cat });
   }
 
-  getOne(id: string) {
-    return this.cats.find((cat) => cat.id === id);
+  getOne(id: number) {
+    return this.prisma.cat.findFirstOrThrow({ where: { id } });
   }
 
-  update(id: string, catToUpdate: Cat) {
-    this.cats = this.cats.map((cat) => {
-      if (catToUpdate.id === id) {
-        return catToUpdate;
-      }
-      return cat;
-    });
+  async update(id: number, catToUpdate: CreateCatDto) {
+    await this.prisma.cat.findFirstOrThrow({ where: { id } });
+    return this.prisma.cat.update({ where: { id }, data: catToUpdate });
   }
 
-  patch(id: string, catToUpdate: Cat) {
-    this.cats = this.cats.map((cat) => {
-      if (catToUpdate.id === id) {
-        return catToUpdate;
-      }
-      return cat;
-    });
-  }
-
-  delete(id: string) {
-    this.cats = this.cats.filter((cat) => cat.id !== id);
+  async delete(id: number) {
+    await this.prisma.cat.findFirstOrThrow({ where: { id } });
+    return this.prisma.cat.delete({ where: { id } });
   }
 
   findAll(take: number, skip: number, name?: string, temperament?: string) {

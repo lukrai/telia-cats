@@ -6,7 +6,6 @@ import {
   Get,
   Param,
   ParseIntPipe,
-  Patch,
   Post,
   Put,
   Query,
@@ -20,7 +19,7 @@ export class CatsController {
 
   @Post()
   async create(@Body() createCatDto: CreateCatDto) {
-    this.catsService.create(createCatDto);
+    return this.catsService.create(createCatDto);
   }
 
   @Get()
@@ -35,22 +34,17 @@ export class CatsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('number') id: number) {
     return this.catsService.getOne(id);
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateCatDto: CreateCatDto) {
-    return this.catsService.update(id, updateCatDto);
-  }
-
-  @Patch(':id')
-  patch(@Param('id') id: string, @Body() updateCatDto: CreateCatDto) {
-    return this.catsService.patch(id, updateCatDto);
+  async update(@Param('id') id: number, @Body() createCatDto: CreateCatDto) {
+    return this.catsService.update(id, createCatDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return `This action removes a #${id} cat`;
+  async remove(@Param('id') id: number) {
+    return this.catsService.delete(id);
   }
 }
