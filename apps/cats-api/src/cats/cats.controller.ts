@@ -22,7 +22,7 @@ export class CatsController {
   }
 
   @Get()
-  async findAll(): Promise<Cat[]> {
+  async findAll() {
     return this.catsService.findAll();
   }
 
