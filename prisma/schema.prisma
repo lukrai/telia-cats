@@ -11,8 +11,45 @@ datasource db {
 }
 
 model Cat {
-  id          Int     @id @default(autoincrement())
-  name        String
-  temperament String
-  alt_name    String?
+  id                 Int     @id @default(autoincrement())
+  weight_imperial    String
+  weight_metric      String
+  original_id        String  @unique
+  name               String
+  cfa_url            String?
+  vetstreet_url      String?
+  vcahospitals_url   String?
+  temperament        String
+  origin             String
+  country_codes      String?
+  country_code       String?
+  description        String
+  life_span          String?
+  indoor             Int?    @default(0)
+  lap                Int?    @default(0)
+  alt_names          String?
+  adaptability       Int?    @default(0)
+  affection_level    Int?    @default(0)
+  dog_friendly       Int?    @default(0)
+  energy_level       Int?    @default(0)
+  child_friendly     Int?    @default(0)
+  cat_friendly       Int?    @default(0)
+  grooming           Int?    @default(0)
+  health_issues      Int?    @default(0)
+  intelligence       Int?    @default(0)
+  shedding_level     Int?    @default(0)
+  social_needs       Int?    @default(0)
+  stranger_friendly  Int?    @default(0)
+  vocalisation       Int?    @default(0)
+  experimental       Int?    @default(0)
+  hairless           Int?    @default(0)
+  natural            Int?    @default(0)
+  rare               Int?    @default(0)
+  rex                Int?    @default(0)
+  suppressed_tail    Int?    @default(0)
+  short_legs         Int?    @default(0)
+  wikipedia_url      String?
+  hypoallergenic     Int?    @default(0)
+  bidability         Int?    @default(0)
+  reference_image_id String?
 }
