@@ -2,7 +2,7 @@ import TableRow from '../table-row/table-row';
 import styles from './table.module.scss';
 
 export interface TableProps<T> {
-  items: T[];
+  items: T[] | undefined;
   keysToShow: (keyof T)[];
 }
 
@@ -20,7 +20,7 @@ export function Table<T extends { id: number | string }>({
         </tr>
       </thead>
       <tbody>
-        {items.length ? (
+        {items?.length ? (
           items.map((item) => {
             return (
               <TableRow key={item.id} rowItem={item} keysToShow={keysToShow} />
