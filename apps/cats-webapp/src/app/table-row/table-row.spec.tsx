@@ -1,9 +1,10 @@
 import '@testing-library/jest-dom';
 import { screen, render } from '@testing-library/react';
+import { ReactElement } from 'react';
 
 import TableRow from './table-row';
 
-const TableWrapper = (props: any) => (
+const TableWrapper = (props: { children: ReactElement }) => (
   <table>
     <tbody>{props.children}</tbody>
   </table>
