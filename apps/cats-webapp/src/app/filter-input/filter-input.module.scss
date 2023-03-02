@@ -1,6 +1,8 @@
 .filterInput {
-  padding: 1rem;
   label {
-    margin-right: 1rem;
+    margin-right: 0.25rem;
+  }
+  input {
+    max-width: 84px;
   }
 }

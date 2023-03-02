@@ -2,7 +2,6 @@ import { Cat } from '@prisma/client';
 import axios from 'axios';
 import { ChangeEvent, useState } from 'react';
 import { useQuery } from 'react-query';
-import FilterInput from '../filter-input/filter-input';
 import Pagination from '../pagination/pagination';
 import Table from '../table/table';
 import styles from './cats.module.scss';
@@ -38,7 +37,7 @@ export function Cats(props: CatsProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [nameFilter, setNameFilter] = useState('');
   const [temperamentFilter, setTemperamentFilter] = useState('');
-  const { data, isLoading } = useCats(
+  const { data, isFetching } = useCats(
     currentPage,
     nameFilter,
     temperamentFilter
@@ -54,21 +53,23 @@ export function Cats(props: CatsProps) {
 
   return (
     <div>
-      <FilterInput
-        label={'Filter by name'}
-        disabled={isLoading}
-        onChange={onNameFilterChange}
-        placeholder="Eg. Mau"
-      />
-      <FilterInput
-        label={'Filter by temperament'}
-        disabled={isLoading}
-        onChange={onTemperamentFilterChange}
-        placeholder="Eg. Active"
-      />
       <Table
         items={data}
         keysToShow={['name', 'original_id', 'temperament', 'description']}
+        keysToFilter={['name', 'temperament']}
+        isLoading={isFetching}
+        filters={[
+          {
+            key: 'name',
+            onChange: onNameFilterChange,
+            placeholder: 'Eg. Mau',
+          },
+          {
+            key: 'temperament',
+            onChange: onTemperamentFilterChange,
+            placeholder: 'Eg. Active',
+          },
+        ]}
       />
       <Pagination activePage={currentPage} setActivePage={setCurrentPage} />
     </div>

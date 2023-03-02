@@ -15,13 +15,11 @@
 
 .columns {
   tr {
-    display: flex;
-    flex-direction: row;
-    column-gap: 20px;
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-auto-flow: column;
     th {
       text-transform: capitalize;
-      flex: auto;
-      text-align: center;
     }
   }
 }
