@@ -18,33 +18,33 @@ export class CatsController {
   constructor(private catsService: CatsService) {}
 
   @Post()
-  async create(@Body() createCatDto: CreateCatDto) {
-    return this.catsService.create(createCatDto);
+  async createCat(@Body() createCatDto: CreateCatDto) {
+    return this.catsService.createCat(createCatDto);
   }
 
   @Get()
-  async findAll(
+  async getAllCats(
     @Query('pageSize', new DefaultValuePipe(10), ParseIntPipe) pageSize: number,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query('name', new DefaultValuePipe(undefined)) name: string | undefined,
     @Query('temperament', new DefaultValuePipe(undefined))
     temperament: string | undefined
   ) {
-    return this.catsService.findAll(pageSize, page, name, temperament);
+    return this.catsService.getAllCats(pageSize, page, name, temperament);
   }
 
   @Get(':id')
-  async findOne(@Param('number') id: number) {
-    return this.catsService.getOne(id);
+  async getOneCat(@Param('number') id: number) {
+    return this.catsService.getOneCatById(id);
   }
 
   @Put(':id')
-  async update(@Param('id') id: number, @Body() createCatDto: CreateCatDto) {
-    return this.catsService.update(id, createCatDto);
+  async updateCat(@Param('id') id: number, @Body() createCatDto: CreateCatDto) {
+    return this.catsService.updateCatById(id, createCatDto);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: number) {
-    return this.catsService.delete(id);
+  async deleteCat(@Param('id') id: number) {
+    return this.catsService.deleteCatById(id);
   }
 }
