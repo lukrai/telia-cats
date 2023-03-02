@@ -24,7 +24,8 @@ export class CatsService {
     return this.prisma.cat.delete({ where: { id } });
   }
 
-  findAll(take: number, skip: number, name?: string, temperament?: string) {
+  findAll(take: number, page: number, name?: string, temperament?: string) {
+    const skip = page > 0 ? take * (page - 1) : 0;
     return this.prisma.cat.findMany({
       skip,
       take,

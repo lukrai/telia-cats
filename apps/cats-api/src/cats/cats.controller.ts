@@ -24,13 +24,13 @@ export class CatsController {
 
   @Get()
   async findAll(
-    @Query('take', new DefaultValuePipe(10), ParseIntPipe) take: number,
-    @Query('skip', new DefaultValuePipe(0), ParseIntPipe) skip: number,
+    @Query('pageSize', new DefaultValuePipe(10), ParseIntPipe) pageSize: number,
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query('name', new DefaultValuePipe(undefined)) name: string | undefined,
     @Query('temperament', new DefaultValuePipe(undefined))
     temperament: string | undefined
   ) {
-    return this.catsService.findAll(take, skip, name, temperament);
+    return this.catsService.findAll(pageSize, page, name, temperament);
   }
 
   @Get(':id')
