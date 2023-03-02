@@ -42,6 +42,7 @@ export function Cats(props: CatsProps) {
     nameFilter,
     temperamentFilter
   );
+  const isNextButtonDisabled = Number(data?.length) === 0;
 
   const onNameFilterChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNameFilter(event.target.value);
@@ -71,7 +72,11 @@ export function Cats(props: CatsProps) {
           },
         ]}
       />
-      <Pagination activePage={currentPage} setActivePage={setCurrentPage} />
+      <Pagination
+        activePage={currentPage}
+        setActivePage={setCurrentPage}
+        isNextButtonDisabled={isNextButtonDisabled}
+      />
     </div>
   );
 }

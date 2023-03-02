@@ -5,7 +5,11 @@ import Pagination from './pagination';
 describe('Pagination', () => {
   it('should render successfully', () => {
     const { baseElement } = render(
-      <Pagination activePage={1} setActivePage={jest.fn()} />
+      <Pagination
+        activePage={1}
+        setActivePage={jest.fn()}
+        isNextButtonDisabled={false}
+      />
     );
     expect(baseElement).toBeTruthy();
   });

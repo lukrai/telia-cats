@@ -3,9 +3,14 @@ import styles from './pagination.module.scss';
 export interface PaginationProps {
   activePage: number;
   setActivePage: (page: number) => void;
+  isNextButtonDisabled: boolean;
 }
 
-const Pagination = ({ activePage, setActivePage }: PaginationProps) => {
+const Pagination = ({
+  activePage,
+  setActivePage,
+  isNextButtonDisabled,
+}: PaginationProps) => {
   return (
     <div className={styles.pagination}>
       <button
@@ -15,7 +20,12 @@ const Pagination = ({ activePage, setActivePage }: PaginationProps) => {
         {'<'}
       </button>
       <div>{activePage}</div>
-      <button onClick={() => setActivePage(activePage + 1)}>{'>'} </button>
+      <button
+        disabled={isNextButtonDisabled}
+        onClick={() => setActivePage(activePage + 1)}
+      >
+        {'>'}{' '}
+      </button>
     </div>
   );
 };
