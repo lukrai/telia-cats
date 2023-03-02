@@ -16,7 +16,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@telia-cats-monorepo/shared-types": ["libs/shared-types/src/index.ts"]
+      "components/*": ["apps/cats-webapp/src/app/components/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
