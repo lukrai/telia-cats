@@ -20,6 +20,6 @@ describe('App', () => {
         <App />
       </BrowserRouter>
     );
-    expect(getByText(/Welcome cats-webapp/gi)).toBeTruthy();
+    expect(getByText(/Welcome to the cats webapp/i)).toBeTruthy();
   });
 });
