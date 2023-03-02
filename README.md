@@ -75,13 +75,19 @@ Well, I had an opportunity to try something new so I decided to go with monorepo
 ## Useful commands
 
 `npx nx g @nrwl/react:app cats-webapp` Generates react app
+
 `npx nx g @nrwl/node:lib shared-types` Generates node lib
+
 `npx nx g @nrwl/react:component button --project cats-webapp` Generate react component.
 
 `npx prisma db seed` Seeds db.
+
 `npx prisma studio` Opens database UI.
+
 `npx prisma db push` Pushes schema to database
+
 `npx prisma generate` Generates TS types.
 
 `nest g resource name`
+
 `npx nest generate filter filter-name`
