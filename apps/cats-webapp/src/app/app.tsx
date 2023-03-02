@@ -20,9 +20,8 @@ export function App() {
           <span> Hello there, </span>
           Welcome to the cats webapp 👋
           <span>
-            {' '}
             This a very basic table with pagination and filtering functionality,
-            try it out!{' '}
+            try it out!
           </span>
         </h1>
         <Cats />

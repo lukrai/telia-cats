@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { useCats } from '../api/cats';
-import Table from 'components/table/table';
+import Table from 'components/table';
 import Pagination from 'components/pagination/pagination';
 
 export function Cats() {
@@ -27,7 +27,6 @@ export function Cats() {
       <Table
         items={data}
         keysToShow={['name', 'original_id', 'temperament', 'description']}
-        keysToFilter={['name', 'temperament']}
         isLoading={isFetching}
         filters={[
           {

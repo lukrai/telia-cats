@@ -1,12 +1,11 @@
 import { ChangeEvent } from 'react';
-import FilterInput from '../filter-input/filter-input';
-import TableRow from '../table-row/table-row';
+import TableRow from './table-row/table-row';
+import TableHeaderRow from './table-header-row';
 import styles from './table.module.scss';
 
 export interface TableProps<T> {
   items: T[] | undefined;
   keysToShow: (keyof T)[];
-  keysToFilter?: (keyof T)[];
   isLoading?: boolean;
   filters?: {
     key: keyof T;
@@ -18,24 +17,9 @@ export interface TableProps<T> {
 export function Table<T extends { id: number | string }>({
   items,
   keysToShow,
-  keysToFilter,
   filters,
   isLoading = false,
 }: TableProps<T>) {
-  const getColumnFilter = (filterKey: string) => {
-    const filter = filters?.find((filter) => filter.key === filterKey);
-    if (filter) {
-      return (
-        <FilterInput
-          label={'Filter'}
-          onChange={filter.onChange}
-          placeholder={filter.placeholder}
-        />
-      );
-    }
-    return null;
-  };
-
   return (
     <>
       <div className={styles.loader}>{isLoading && 'Loading...'}</div>
@@ -43,17 +27,7 @@ export function Table<T extends { id: number | string }>({
         className={`${styles.rounded} ${styles.shadow} ${styles.container}`}
       >
         <thead className={styles.columns}>
-          <tr>
-            {keysToShow.map((key) => {
-              return (
-                <th key={key as string}>
-                  {key as string}
-                  {keysToFilter?.includes(key) &&
-                    getColumnFilter(key as string)}
-                </th>
-              );
-            })}
-          </tr>
+          <TableHeaderRow keysToShow={keysToShow} filters={filters} />
         </thead>
         <tbody>
           {items?.length ? (
