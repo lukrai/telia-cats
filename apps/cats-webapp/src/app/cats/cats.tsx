@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import { useCats } from '../api/cats';
-import Table from 'components/table';
-import Pagination from 'components/pagination/pagination';
+import Pagination from '../components/pagination';
+import Table from '../components/table';
 
 export function Cats() {
   const [currentPage, setCurrentPage] = useState(1);

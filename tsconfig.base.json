@@ -15,9 +15,7 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {
-      "components/*": ["apps/cats-webapp/src/app/components/*"]
-    }
+    "paths": {}
   },
   "exclude": ["node_modules", "tmp"]
 }

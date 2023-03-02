@@ -1,5 +1,5 @@
-import FilterInput from 'components/filter-input/filter-input';
 import { ChangeEvent } from 'react';
+import FilterInput from '../filter-input';
 
 export interface TableHeaderCellProps<T> {
   filterKey: keyof T;
