@@ -1,8 +1,16 @@
 import styles from './app.module.scss';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryCache, QueryClient, QueryClientProvider } from 'react-query';
 import Cats from './cats/cats';
+import toast, { Toaster } from 'react-hot-toast';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  queryCache: new QueryCache({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onError: (error: any) => {
+      toast.error(`Something went wrong: ${error.message}`);
+    },
+  }),
+});
 
 export function App() {
   return (
@@ -19,6 +27,7 @@ export function App() {
         </h1>
         <Cats />
       </div>
+      <Toaster />
     </QueryClientProvider>
   );
 }
