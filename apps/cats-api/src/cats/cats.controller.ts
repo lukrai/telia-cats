@@ -34,17 +34,20 @@ export class CatsController {
   }
 
   @Get(':id')
-  async getOneCat(@Param('number') id: number) {
+  async getOneCat(@Param('id', ParseIntPipe) id: number) {
     return this.catsService.getOneCatById(id);
   }
 
   @Put(':id')
-  async updateCat(@Param('id') id: number, @Body() createCatDto: CreateCatDto) {
+  async updateCat(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() createCatDto: CreateCatDto
+  ) {
     return this.catsService.updateCatById(id, createCatDto);
   }
 
   @Delete(':id')
-  async deleteCat(@Param('id') id: number) {
+  async deleteCat(@Param('id', ParseIntPipe) id: number) {
     return this.catsService.deleteCatById(id);
   }
 }
