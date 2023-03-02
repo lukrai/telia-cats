@@ -6,9 +6,9 @@ import styles from './table.module.scss';
 export interface TableProps<T> {
   items: T[] | undefined;
   keysToShow: (keyof T)[];
-  keysToFilter: (keyof T)[];
-  isLoading: boolean;
-  filters: {
+  keysToFilter?: (keyof T)[];
+  isLoading?: boolean;
+  filters?: {
     key: keyof T;
     onChange: (event: ChangeEvent<HTMLInputElement>) => void;
     placeholder: string;
@@ -20,10 +20,10 @@ export function Table<T extends { id: number | string }>({
   keysToShow,
   keysToFilter,
   filters,
-  isLoading,
+  isLoading = false,
 }: TableProps<T>) {
   const getColumnFilter = (filterKey: string) => {
-    const filter = filters.find((filter) => filter.key === filterKey);
+    const filter = filters?.find((filter) => filter.key === filterKey);
     if (filter) {
       return (
         <FilterInput
@@ -37,35 +37,44 @@ export function Table<T extends { id: number | string }>({
   };
 
   return (
-    <table className={`${styles.rounded} ${styles.shadow} ${styles.container}`}>
-      <thead className={styles.columns}>
-        <tr>
-          {keysToShow.map((key) => {
-            return (
-              <th key={key as string}>
-                {key as string}
-                {keysToFilter.includes(key) && getColumnFilter(key as string)}
-              </th>
-            );
-          })}
-        </tr>
-      </thead>
-      <tbody>
-        {isLoading && <span>Loading...</span>}
-        {items?.length ? (
-          items.map((item) => {
-            return (
-              <TableRow key={item.id} rowItem={item} keysToShow={keysToShow} />
-            );
-          })
-        ) : (
-          <TableRow
-            rowItem={{ message: 'No Data.' }}
-            keysToShow={['message']}
-          />
-        )}
-      </tbody>
-    </table>
+    <>
+      <div className={styles.loader}>{isLoading && 'Loading...'}</div>
+      <table
+        className={`${styles.rounded} ${styles.shadow} ${styles.container}`}
+      >
+        <thead className={styles.columns}>
+          <tr>
+            {keysToShow.map((key) => {
+              return (
+                <th key={key as string}>
+                  {key as string}
+                  {keysToFilter?.includes(key) &&
+                    getColumnFilter(key as string)}
+                </th>
+              );
+            })}
+          </tr>
+        </thead>
+        <tbody>
+          {items?.length ? (
+            items.map((item) => {
+              return (
+                <TableRow
+                  key={item.id}
+                  rowItem={item}
+                  keysToShow={keysToShow}
+                />
+              );
+            })
+          ) : (
+            <TableRow
+              rowItem={{ message: 'No Data.' }}
+              keysToShow={['message']}
+            />
+          )}
+        </tbody>
+      </table>
+    </>
   );
 }
 
