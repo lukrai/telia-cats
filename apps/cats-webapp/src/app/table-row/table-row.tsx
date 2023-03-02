@@ -13,7 +13,11 @@ export function TableRow<T>({ rowItem, keysToShow }: TableRowProps<T>) {
         if (!rowItem[rowKey]) {
           return null;
         }
-        return <td key={rowKey as string}>{rowItem[rowKey] as ReactNode}</td>;
+        return (
+          <td key={rowKey as string} title={rowItem[rowKey] as string}>
+            {rowItem[rowKey] as ReactNode}
+          </td>
+        );
       })}
     </tr>
   );
